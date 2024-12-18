@@ -14,8 +14,8 @@ function drawRandomShapes() {
   let width = canvas.width;
   let height = canvas.height;
 
-  let numCircles = Utils.randomNumber(3, 7);
-  let numRectangles = Utils.randomNumber(2, 4);
+  let numCircles = Utils.randomNumber(2, 4);
+  let numRectangles = Utils.randomNumber(3, 5);
   let numTriangles = Utils.randomNumber(2, 5);
 
   // functie voor cirkels
