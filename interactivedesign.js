@@ -1,11 +1,7 @@
-import contexta from "./script/context.js";
-import * as Utils from "./script/utils.js";
-
-let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
-
+let canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+let context = canvas.getContext("2d");
 
 const circles = [];
 const numCircles = 100;
@@ -15,7 +11,7 @@ let mousePosition = { x: 0, y: 0 };
 function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
-// Circle class
+
 class Circle {
   constructor(x, y, radius, color) {
     this.x = x;
@@ -27,7 +23,6 @@ class Circle {
     this.speedY = getRandom(-2, 2);
   }
 
-  // cirkel tekenen
   draw() {
     context.beginPath();
     context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -70,10 +65,47 @@ function createCircles() {
   }
 }
 
+function signature() {
+  const boxWidth = 50;
+  const boxHeight = 50;
+  const baseX = canvas.width - 350;
+  const baseY = canvas.height - 350;
+
+  context.fillStyle = "black";
+  context.beginPath();
+  context.rect(baseX, baseY, 300, 300);
+  context.stroke();
+  context.fill();
+  context.closePath();
+
+  // Groene vakjes tekenen
+  drawBox(baseX + 75, baseY, boxWidth, boxHeight);
+  drawBox(baseX + 125, baseY, boxWidth, boxHeight);
+  drawBox(baseX + 175, baseY, boxWidth, boxHeight);
+  drawBox(baseX + 75, baseY + 100, boxWidth, boxHeight);
+  drawBox(baseX + 125, baseY + 100, boxWidth, boxHeight);
+  drawBox(baseX + 175, baseY + 100, boxWidth, boxHeight);
+  drawBox(baseX + 125, baseY + 150, boxWidth, boxHeight);
+  drawBox(baseX + 75, baseY + 200, boxWidth, boxHeight);
+  drawBox(baseX + 25, baseY + 200, boxWidth, boxHeight);
+  drawBox(baseX + 175, baseY + 200, boxWidth, boxHeight);
+  drawBox(baseX + 225, baseY + 200, boxWidth, boxHeight);
+}
+
+function drawBox(x, y, width, height) {
+  context.fillStyle = "green";
+  context.beginPath();
+  context.rect(x, y, width, height);
+  context.fill();
+  context.closePath();
+}
+
 function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
   circles.forEach((circle) => circle.update());
+
+  signature();
 
   requestAnimationFrame(animate);
 }
